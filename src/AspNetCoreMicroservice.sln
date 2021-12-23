@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreMicroservice", "A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution-wide", "Solution-wide", "{610A5741-4EAC-4E32-950F-2F0FE39E9B58}"
 	ProjectSection(SolutionItems) = preProject
+		dockerize\Dockerfile = dockerize\Dockerfile
+		Dockerize.ps1 = Dockerize.ps1
 		README.md = README.md
 	EndProjectSection
 EndProject
