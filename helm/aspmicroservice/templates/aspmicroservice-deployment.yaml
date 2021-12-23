@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspmicroservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aspmicroservice 
+  template:
+    metadata:
+      labels:
+        app: aspmicroservice
+    spec:
+      containers:
+      - image: aspmicroservice:dev
+        imagePullPolicy: Never
+        name: aspmicroservice
+        ports:
+        - name: aspmicroservice
+          containerPort: 80

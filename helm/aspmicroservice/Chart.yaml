@@ -1,0 +1,6 @@
+apiVersion: v2
+name: aspmicroservice
+appVersion: "1.0"
+description: "ASP .NET Core microservice"
+version: 0.1.0
+type: application
