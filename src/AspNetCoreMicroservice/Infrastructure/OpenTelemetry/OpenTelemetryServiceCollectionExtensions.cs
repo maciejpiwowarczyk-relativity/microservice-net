@@ -5,7 +5,7 @@ namespace AspNetCoreMicroservice.Infrastructure.OpenTelemetry
 {
 	public static class OpenTelemetryServiceCollectionExtensions
 	{
-		public static void AddOpenTelemetry(this IServiceCollection services)
+		public static void AddOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
 		{
 			// Adding the OtlpExporter creates a GrpcChannel.
 			// This switch must be set before creating a GrpcChannel/HttpClient when calling an insecure gRPC service.
@@ -27,7 +27,7 @@ namespace AspNetCoreMicroservice.Infrastructure.OpenTelemetry
 					})
 					.AddOtlpExporter(config =>
 					{
-						config.Endpoint = new Uri("http://localhost:4317");
+						config.Endpoint = new Uri(configuration["OpenTelemetry:Endpoint"]);
 					});
 				
 				builder.AddConsoleExporter();

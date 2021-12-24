@@ -3,11 +3,10 @@ using AspNetCoreMicroservice.Infrastructure.OpenTelemetry;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddOpenTelemetry();
+builder.Services.AddOpenTelemetry(builder.Configuration);
 
 var app = builder.Build();
 

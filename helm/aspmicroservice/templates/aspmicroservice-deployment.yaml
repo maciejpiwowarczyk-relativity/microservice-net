@@ -19,3 +19,6 @@ spec:
         ports:
         - name: aspmicroservice
           containerPort: 80
+        env:
+        - name: OpenTelemetry__Endpoint
+          value: "http://jaeger:4317"
