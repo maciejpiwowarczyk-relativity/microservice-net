@@ -3,3 +3,4 @@ dotnet publish AspNetCoreMicroservice -c release -o dockerize\publish -r linux-x
 cd dockerize
 docker build -t aspmicroservice:dev .
 docker image prune -f
+cd ..

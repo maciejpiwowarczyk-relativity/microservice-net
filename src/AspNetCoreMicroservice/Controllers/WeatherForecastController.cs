@@ -1,4 +1,7 @@
+using AspNetCoreMicroservice.Infrastructure.Redis;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using StackExchange.Redis;
 
 namespace AspNetCoreMicroservice.Controllers
 {
@@ -12,6 +15,7 @@ namespace AspNetCoreMicroservice.Controllers
 		};
 
 		private readonly ILogger<WeatherForecastController> _logger;
+		private static readonly RedisKey RedisKey = new RedisKey("WeatherForecast");
 
 		public WeatherForecastController(ILogger<WeatherForecastController> logger)
 		{
@@ -21,13 +25,27 @@ namespace AspNetCoreMicroservice.Controllers
 		[HttpGet("latest")]
 		public IEnumerable<WeatherForecast> Get()
 		{
-			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+			return GetForecast();
+		}
+
+		private static WeatherForecast[] GetForecast()
+		{
+			var db = RedisConnectionProvider.Connection.GetDatabase();
+			var forecastValue = db.StringGet(RedisKey);
+			if (forecastValue.HasValue)
 			{
-				Date = DateTime.Now.AddDays(index),
-				TemperatureC = Random.Shared.Next(-20, 55),
-				Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-			})
-			.ToArray();
+				return JsonConvert.DeserializeObject<WeatherForecast[]>((string)forecastValue) ?? Array.Empty<WeatherForecast>();
+			}
+
+			var forecast = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+				{
+					Date = DateTime.Now.AddDays(index),
+					TemperatureC = Random.Shared.Next(-20, 55),
+					Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+				})
+				.ToArray();
+			db.StringSet(RedisKey, JsonConvert.SerializeObject(forecast));
+			return forecast;
 		}
 	}
 }

@@ -1,11 +1,12 @@
 ﻿using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using StackExchange.Redis;
 
 namespace AspNetCoreMicroservice.Infrastructure.OpenTelemetry
 {
 	public static class OpenTelemetryServiceCollectionExtensions
 	{
-		public static void AddOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
+		public static void AddOpenTelemetry(this IServiceCollection services, IConfiguration configuration, IConnectionMultiplexer redisConnection)
 		{
 			// Adding the OtlpExporter creates a GrpcChannel.
 			// This switch must be set before creating a GrpcChannel/HttpClient when calling an insecure gRPC service.
@@ -24,6 +25,10 @@ namespace AspNetCoreMicroservice.Infrastructure.OpenTelemetry
 					.AddHttpClientInstrumentation(options =>
 					{
 						options.RecordException = true;
+					})
+					.AddRedisInstrumentation(redisConnection, options =>
+					{
+						options.SetVerboseDatabaseStatements = true;
 					})
 					.AddOtlpExporter(config =>
 					{

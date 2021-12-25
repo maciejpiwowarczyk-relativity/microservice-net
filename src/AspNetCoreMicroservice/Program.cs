@@ -1,12 +1,16 @@
 using AspNetCoreMicroservice.Infrastructure.OpenTelemetry;
+using AspNetCoreMicroservice.Infrastructure.Redis;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddOpenTelemetry(builder.Configuration);
+RedisConnectionProvider.Initialize(configuration);
+builder.Services.AddOpenTelemetry(configuration, RedisConnectionProvider.Connection);
 
 var app = builder.Build();
 

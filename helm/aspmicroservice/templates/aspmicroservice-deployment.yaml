@@ -22,3 +22,5 @@ spec:
         env:
         - name: OpenTelemetry__Endpoint
           value: "http://jaeger:4317"
+        - name: Redis__Configuration
+          value: "redis"
