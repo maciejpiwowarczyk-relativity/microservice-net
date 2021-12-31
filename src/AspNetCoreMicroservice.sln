@@ -7,10 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreMicroservice", "A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution-wide", "Solution-wide", "{610A5741-4EAC-4E32-950F-2F0FE39E9B58}"
 	ProjectSection(SolutionItems) = preProject
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		dockerize\Dockerfile = dockerize\Dockerfile
 		Dockerize.ps1 = Dockerize.ps1
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreMicroservice.Tests", "AspNetCoreMicroservice.Tests\AspNetCoreMicroservice.Tests.csproj", "{FAC6D7B6-D5FE-4A01-B916-47C9C5030C9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +25,10 @@ Global
 		{C44FA63A-3374-4364-8704-D221ABCA96E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C44FA63A-3374-4364-8704-D221ABCA96E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C44FA63A-3374-4364-8704-D221ABCA96E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC6D7B6-D5FE-4A01-B916-47C9C5030C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC6D7B6-D5FE-4A01-B916-47C9C5030C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC6D7B6-D5FE-4A01-B916-47C9C5030C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC6D7B6-D5FE-4A01-B916-47C9C5030C9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

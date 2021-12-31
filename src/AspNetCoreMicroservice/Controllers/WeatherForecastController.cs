@@ -31,7 +31,7 @@ namespace AspNetCoreMicroservice.Controllers
 		private static WeatherForecast[] GetForecast()
 		{
 			var db = RedisConnectionProvider.Connection.GetDatabase();
-			var forecastValue = db.StringGet(RedisKey);
+			var forecastValue = db?.StringGet(RedisKey);
 			if (forecastValue.HasValue)
 			{
 				return JsonConvert.DeserializeObject<WeatherForecast[]>((string)forecastValue) ?? Array.Empty<WeatherForecast>();
@@ -44,7 +44,7 @@ namespace AspNetCoreMicroservice.Controllers
 					Summary = Summaries[Random.Shared.Next(Summaries.Length)]
 				})
 				.ToArray();
-			db.StringSet(RedisKey, JsonConvert.SerializeObject(forecast));
+			db?.StringSet(RedisKey, JsonConvert.SerializeObject(forecast));
 			return forecast;
 		}
 	}

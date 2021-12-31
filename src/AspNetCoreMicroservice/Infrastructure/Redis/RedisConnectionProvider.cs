@@ -5,7 +5,7 @@ namespace AspNetCoreMicroservice.Infrastructure.Redis
 {
 	public static class RedisConnectionProvider
 	{
-		public static IConnectionMultiplexer Connection { get; private set; }
+		public static IConnectionMultiplexer Connection { get; set; }
 		
 		public static void Initialize(IConfiguration configuration)
 		{
